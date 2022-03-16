@@ -5,4 +5,12 @@ class Transaction < ApplicationRecord
   validates :input_currency, presence: true, length: { is: 3 }
   validates :output_amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :output_currency, presence: true, length: { is: 3 }
+
+  before_validation :set_transaction_id
+
+  private
+
+  def set_transaction_id
+    self.transaction_id = TransactionId.generator
+  end
 end

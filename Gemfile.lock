@@ -92,6 +92,10 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faraday (2.2.0)
+      faraday-net_http (~> 2.0)
+      ruby2_keywords (>= 0.0.4)
+    faraday-net_http (2.0.1)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.10.0)
@@ -100,6 +104,9 @@ GEM
     io-wait (0.2.1)
     irb (1.4.1)
       reline (>= 0.3.0)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
     loofah (2.14.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -181,6 +188,7 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.11.0)
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     selenium-webdriver (4.1.0)
       childprocess (>= 0.5, < 5.0)
@@ -213,6 +221,8 @@ DEPENDENCIES
   debug
   factory_bot_rails
   faker!
+  faraday
+  jbuilder
   puma (~> 5.0)
   rails (~> 7.0.2, >= 7.0.2.2)
   rspec-rails
