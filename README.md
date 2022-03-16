@@ -1,26 +1,44 @@
-# README
+# FX Transactions
+## Set up
+run:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- bundle install
+- bin/rails db:setup
 
-Things you may want to cover:
+## Automated Tests
+run:
+- bundle exec rspec
 
-* Ruby version
+## Postman Tests
+- Login in postman as an initialized admin/customer users described in authentication service user
 
-* System dependencies
+OR
 
-* Configuration
+- create user and login:
 
-* Database creation
+{
+	"user" :{
+    "first_name":"Jeje",
+    "last_name":"Namu",
+		"email":"jeje@namu.com",
+    "role":"customer",
+		"password":"password"
+	}
+}
 
-* Database initialization
+- make requests using the returned token as admin/customer user (curl/postman)
 
-* How to run the test suite
+* create a transaction 
+  POST {{trans-service-url}}/transactions
 
-* Services (job queues, cache servers, search engines, etc.)
+* get system transactions
+  GET {{trans-service-url}}/transactions
 
-* Deployment instructions
+* get a specific transaction
+  GET {{trans-service-url}}/transactions/:id
 
-* ...
 
-rails generate model transaction transaction_id:string  customer_id:integer input_amount:decimal input_currency:string output_amount:decimal output_currency:string
+NOTE: Admin account gets all the system transactions while customer account can only get related transactions
+# Test Coverage
+Coverage report generated for RSpec to /bank/coverage.
+open /fx_transactions/coverage/index.html on your browser
