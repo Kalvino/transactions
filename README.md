@@ -18,9 +18,9 @@ OR
 
 {
 	"user" :{
-    "first_name":"Jeje",
-    "last_name":"Namu",
-		"email":"jeje@namu.com",
+    "first_name":"Rapakti",
+    "last_name":"Chakilo",
+		"email":"rapakti@chakilo.com",
     "role":"customer",
 		"password":"password"
 	}
@@ -62,5 +62,5 @@ token = curl -X POST credentials http://localhost:3001
 
 NOTE: Admin account gets all the system transactions while customer account can only get related transactions
 # Test Coverage
-Coverage report generated for RSpec to /bank/coverage.
-open /fx_transactions/coverage/index.html on your browser
+Coverage report generated for RSpec to /fx_transactions/coverage.
+open /fx_transactions/coverage/index.html on your browser.
