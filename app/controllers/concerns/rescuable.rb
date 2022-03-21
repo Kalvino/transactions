@@ -13,26 +13,26 @@ module Rescuable
   private
 
   def handle_validation_error(exception)
-    respond_with_error(exception)
+    error_response(exception)
   end
 
   def handle_record_not_found(exception)
-    respond_with_error(exception.message, :not_found)
+    error_response(exception.message, :not_found)
   end
 
   def handle_record_not_unique(exception)
-    respond_with_error(exception)
+    error_response(exception)
   end
 
   def handle_api_error(exception)
-    respond_with_error(exception, :internal_server_error)
+    error_response(exception, :internal_server_error)
   end
 
   def handle_authentication_error(message = 'authentication failure')
-    respond_with_error(message, :unauthorized)
+    error_response(message, :unauthorized)
   end
 
   def handle_authorization_error(message = 'authorization denied')
-    respond_with_error(message, :forbidden)
+    error_response(message, :forbidden)
   end
 end
