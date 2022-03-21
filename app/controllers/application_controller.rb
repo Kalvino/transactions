@@ -21,7 +21,6 @@ class ApplicationController < ActionController::API
     )
 
     response = conn.get('/verify')
-
     @current_user = JSON.parse(response.body, symbolize_names: true)[:user]
 
     raise Exceptions::AuthenticationError, 'invalid token' unless @current_user
