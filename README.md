@@ -31,32 +31,50 @@ credentials = {
     "password": "password"
 }
 
-token = curl -X POST credentials http://localhost:3001
+### Get token
+curl -X POST 'http://localhost:3001/login' \
+   -H 'Content-Type: application/json' \
+   -d '{ "email": "calv@gmail.com", "password": "password" }'
 
-- make requests using the returned token as admin/customer user (curl/postman)
+- make requests to transactions microservice using the returned token as admin/customer user (curl/postman)
 
-* create a transaction 
+### create a transaction 
   POST {{trans-service-url}}/transactions
 
   transaction = {
     "transaction" :{
-          "customer_id": 2,
-          "input_amount": 20,
+      "customer_id": 2,
+      "input_amount": 20,
       "input_currency":"USD",
-          "output_amount": "300",
+      "output_amount": "300",
       "output_currency":"KES"
     }
   } 
   
-  e.g curl -X POST -d transaction http://localhost:3000/transactions -H "Accept: application/json"
+   curl -X POST -d transaction {url} 
+   -H "Accept: application/json"
    -H "Authorization: Bearer {token}"
 
 
-* get system transactions
+   curl -X POST 'http://localhost:3000/transactions' \
+   -H 'Content-Type: application/json' \
+   -H 'Authorization: Bearer {token}' \
+   -d '{ "transaction" :{ "customer_id": 2,"input_amount": 20, "input_currency":"USD", "output_amount": "300","output_currency":"KES" } }'
+
+
+### get system transactions
   GET {{trans-service-url}}/transactions
 
-* get a specific transaction
+  curl 'http://localhost:3000/transactions' \
+   -H 'Content-Type: application/json' \
+   -H 'Authorization: Bearer {token}' 
+
+### get a specific transaction by id
   GET {{trans-service-url}}/transactions/:id
+
+  curl 'http://localhost:3000/transactions/1' \
+   -H 'Content-Type: application/json' \
+   -H 'Authorization: Bearer {token}'
 
 
 

@@ -6,15 +6,26 @@ RSpec.describe 'Transactions', type: :request do
   let!(:transaction_attr) { attributes_for(:transaction) }
 
   before do
+    auth_url = 'http://localhost:3001'
+
+    conn = Faraday.new(
+      url: auth_url,
+      headers: { 'Content-Type' => 'application/json' }
+    )
+
+    response = conn.post('/login', '{"email": "calv@gmail.com", "password": "password"}')
+
+    token = JSON.parse(response.body, symbolize_names: true)[:token]
+
     @headers = {
       'ACCEPT' => 'application/json',
-      'HTTP_AUTHORIZATION' => 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NDc1OTk5MDV9.cvDU5SJDg2yCkyj5gndJpXt_9mPdK3xn8rynYvfIHus'
+      'HTTP_AUTHORIZATION' => token
     }
   end
 
   describe 'GET /index' do
     context 'when not logged in' do
-      it 'returns unauthorized' do
+      it 'returns not unauthorized' do
         get transactions_url
         expect(response).to have_http_status(:unauthorized)
       end

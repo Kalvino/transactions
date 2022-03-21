@@ -1,4 +1,4 @@
-module ApiResponders
+module Responders
   extend ActiveSupport::Concern
 
   private

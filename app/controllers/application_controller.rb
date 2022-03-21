@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::API
   before_action :authenticate_request
 
-  include ApiResponders
-  include ApiRescuable
+  include Responders
+  include Rescuable
 
   private
 
@@ -11,9 +11,16 @@ class ApplicationController < ActionController::API
 
     raise Exceptions::AuthenticationError, 'missing token' if header.nil?
 
-    token = header.split(' ').last
-    url = "http://localhost:3001/verify?token=#{token}"
-    response = Faraday.get(url, headers: { 'Content-Type' => 'application/json' })
+    header_token = header.split(' ').last
+    auth_url = 'http://localhost:3001'
+
+    conn = Faraday.new(
+      url: auth_url,
+      params: { token: header_token },
+      headers: { 'Content-Type' => 'application/json' }
+    )
+
+    response = conn.get('/verify')
 
     @current_user = JSON.parse(response.body, symbolize_names: true)[:user]
 

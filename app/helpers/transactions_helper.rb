@@ -2,7 +2,7 @@ module TransactionsHelper
   def authorize(transaction)
     unless (@current_user[:id] == transaction.customer_id) || user_admin?
       raise Exceptions::AuthorizationError,
-            'creator_id and customer_id not matching'
+            'forbidden request'
     end
     true
   end
